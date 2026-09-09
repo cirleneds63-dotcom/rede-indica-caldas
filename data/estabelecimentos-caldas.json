@@ -1,0 +1,481 @@
+{
+  "estabelecimentos": [
+    {
+      "nome": "Park Hotel Caldas Novas",
+      "tipo": "Hotel",
+      "profissao": "Hotelaria",
+      "empresa": "Park Hotel",
+      "whatsapp": "(64) 99999-0001",
+      "endereco": {
+        "rua": "Avenida Goiás",
+        "numero": "1500",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-000"
+      },
+      "servicos": [
+        {
+          "descricao": "Hospedagem com café da manhã",
+          "valor": 150.00
+        },
+        {
+          "descricao": "Pacotes com acesso às piscinas termais",
+          "valor": 250.00
+        },
+        {
+          "descricao": "Eventos corporativos",
+          "valor": 500.00
+        }
+      ],
+      "percentualComissao": 5,
+      "descricao": "Melhor hotel de Caldas Novas com piscinas termais e atendimento de excelência"
+    },
+    {
+      "nome": "Thermas Water Park",
+      "tipo": "Parque Aquático",
+      "profissao": "Lazer e Turismo",
+      "empresa": "Thermas Water Park",
+      "whatsapp": "(64) 99999-0002",
+      "endereco": {
+        "rua": "Avenida Brasil",
+        "numero": "2000",
+        "bairro": "Setor Central",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-100"
+      },
+      "servicos": [
+        {
+          "descricao": "Ingresso inteira (adulto)",
+          "valor": 80.00
+        },
+        {
+          "descricao": "Pacote família (2 adultos + 2 crianças)",
+          "valor": 220.00
+        },
+        {
+          "descricao": "Meia entrada",
+          "valor": 40.00
+        }
+      ],
+      "percentualComissao": 8,
+      "descricao": "Maior parque aquático de Caldas Novas com piscinas termais naturais"
+    },
+    {
+      "nome": "Soraya Odontologia",
+      "tipo": "Consultório Odontológico",
+      "profissao": "Odontologia",
+      "empresa": "Clínica Soraya",
+      "whatsapp": "(64) 98765-0003",
+      "endereco": {
+        "rua": "Rua 13 de Maio",
+        "numero": "850",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-050"
+      },
+      "servicos": [
+        {
+          "descricao": "Limpeza e polimento",
+          "valor": 150.00
+        },
+        {
+          "descricao": "Restauração com resina",
+          "valor": 250.00
+        },
+        {
+          "descricao": "Clareamento dental",
+          "valor": 400.00
+        },
+        {
+          "descricao": "Implante dentário",
+          "valor": 2000.00
+        }
+      ],
+      "percentualComissao": 10,
+      "descricao": "Clínica odontológica completa com equipamentos modernos"
+    },
+    {
+      "nome": "DR. Carlos Fisioterapia",
+      "tipo": "Clínica de Fisioterapia",
+      "profissao": "Fisioterapia",
+      "empresa": "Clínica DR. Carlos",
+      "whatsapp": "(64) 99876-0004",
+      "endereco": {
+        "rua": "Avenida Araguaia",
+        "numero": "500",
+        "bairro": "Setor Sudeste",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-200"
+      },
+      "servicos": [
+        {
+          "descricao": "Sessão de fisioterapia",
+          "valor": 80.00
+        },
+        {
+          "descricao": "Pacote 10 sessões",
+          "valor": 700.00
+        },
+        {
+          "descricao": "Drenagem linfática",
+          "valor": 120.00
+        }
+      ],
+      "percentualComissao": 12,
+      "descricao": "Clínica especializada em reabilitação motora e massage terapêutico"
+    },
+    {
+      "nome": "Estética Beauty Caldas",
+      "tipo": "Salão de Beleza",
+      "profissao": "Estética e Beleza",
+      "empresa": "Beauty Caldas",
+      "whatsapp": "(64) 99123-0005",
+      "endereco": {
+        "rua": "Rua Barão do Rio Branco",
+        "numero": "620",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-060"
+      },
+      "servicos": [
+        {
+          "descricao": "Corte e escova",
+          "valor": 70.00
+        },
+        {
+          "descricao": "Coloração",
+          "valor": 120.00
+        },
+        {
+          "descricao": "Manicure e pedicure",
+          "valor": 60.00
+        },
+        {
+          "descricao": "Depilação a laser",
+          "valor": 150.00
+        }
+      ],
+      "percentualComissao": 15,
+      "descricao": "Salão completo com profissionais certificados"
+    },
+    {
+      "nome": "Restaurante da Vovó",
+      "tipo": "Restaurante",
+      "profissao": "Gastronomia",
+      "empresa": "Restaurante da Vovó",
+      "whatsapp": "(64) 3455-0006",
+      "endereco": {
+        "rua": "Avenida Brasil",
+        "numero": "1200",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-110"
+      },
+      "servicos": [
+        {
+          "descricao": "Almoço executivo",
+          "valor": 45.00
+        },
+        {
+          "descricao": "Prato principal",
+          "valor": 60.00
+        },
+        {
+          "descricao": "Buffet para eventos",
+          "valor": 800.00
+        }
+      ],
+      "percentualComissao": 8,
+      "descricao": "Comida caseira com ingredientes frescos e receitas tradicionais"
+    },
+    {
+      "nome": "Imóveis Caldas - Corretoria",
+      "tipo": "Imobiliária",
+      "profissao": "Imobiliária",
+      "empresa": "Imóveis Caldas",
+      "whatsapp": "(64) 99654-0007",
+      "endereco": {
+        "rua": "Rua Anápolis",
+        "numero": "450",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-070"
+      },
+      "servicos": [
+        {
+          "descricao": "Venda de imóvel residencial",
+          "valor": 30000.00
+        },
+        {
+          "descricao": "Aluguel de temporada",
+          "valor": 2500.00
+        },
+        {
+          "descricao": "Consultoria imobiliária",
+          "valor": 500.00
+        }
+      ],
+      "percentualComissao": 3,
+      "descricao": "Corretora especializada em imóveis residenciais e comerciais em Caldas Novas"
+    },
+    {
+      "nome": "Auto Center Caldas",
+      "tipo": "Oficina Mecânica",
+      "profissao": "Manutenção Automotiva",
+      "empresa": "Auto Center",
+      "whatsapp": "(64) 3456-0008",
+      "endereco": {
+        "rua": "Avenida Goiás",
+        "numero": "3000",
+        "bairro": "Distrito Industrial",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-300"
+      },
+      "servicos": [
+        {
+          "descricao": "Revisão completa",
+          "valor": 200.00
+        },
+        {
+          "descricao": "Troca de óleo e filtro",
+          "valor": 80.00
+        },
+        {
+          "descricao": "Alinhamento e balanceamento",
+          "valor": 150.00
+        }
+      ],
+      "percentualComissao": 10,
+      "descricao": "Oficina completa com mecânicos certificados e peças originais"
+    },
+    {
+      "nome": "Dra. Patricia Dermatologia",
+      "tipo": "Clínica Dermatológica",
+      "profissao": "Dermatologia",
+      "empresa": "Clínica Dermatológica Patricia",
+      "whatsapp": "(64) 98765-0009",
+      "endereco": {
+        "rua": "Avenida Goiás",
+        "numero": "1800",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-150"
+      },
+      "servicos": [
+        {
+          "descricao": "Consulta dermatológica",
+          "valor": 150.00
+        },
+        {
+          "descricao": "Limpeza de pele",
+          "valor": 120.00
+        },
+        {
+          "descricao": "Aplicação de botox",
+          "valor": 600.00
+        },
+        {
+          "descricao": "Peeling químico",
+          "valor": 300.00
+        }
+      ],
+      "percentualComissao": 12,
+      "descricao": "Clínica dermatológica com tratamentos estéticos avançados"
+    },
+    {
+      "nome": "Academia FitBody Caldas",
+      "tipo": "Academia de Musculação",
+      "profissao": "Educação Física",
+      "empresa": "FitBody",
+      "whatsapp": "(64) 99876-0010",
+      "endereco": {
+        "rua": "Rua Rio Grande do Sul",
+        "numero": "400",
+        "bairro": "Setor Sudeste",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-210"
+      },
+      "servicos": [
+        {
+          "descricao": "Mensalidade mensal",
+          "valor": 120.00
+        },
+        {
+          "descricao": "Treino personalizado",
+          "valor": 150.00
+        },
+        {
+          "descricao": "Aula de yoga",
+          "valor": 50.00
+        }
+      ],
+      "percentualComissao": 15,
+      "descricao": "Academia completa com musculação, cardio e aulas funcionais"
+    },
+    {
+      "nome": "Livraria e Papelaria Caldas",
+      "tipo": "Papelaria",
+      "profissao": "Comércio Varejista",
+      "empresa": "Papelaria Caldas",
+      "whatsapp": "(64) 3457-0011",
+      "endereco": {
+        "rua": "Rua 13 de Maio",
+        "numero": "750",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-055"
+      },
+      "servicos": [
+        {
+          "descricao": "Material escolar",
+          "valor": 50.00
+        },
+        {
+          "descricao": "Impressão e cópia",
+          "valor": 0.50
+        },
+        {
+          "descricao": "Encadernação",
+          "valor": 80.00
+        }
+      ],
+      "percentualComissao": 12,
+      "descricao": "Papelaria com grande variedade de produtos escolares e comerciais"
+    },
+    {
+      "nome": "Consultório Dr. Marcelo - Cardiologia",
+      "tipo": "Consultório Cardiológico",
+      "profissao": "Cardiologia",
+      "empresa": "Clínica Cardio Caldas",
+      "whatsapp": "(64) 99876-0012",
+      "endereco": {
+        "rua": "Avenida Araguaia",
+        "numero": "1000",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-160"
+      },
+      "servicos": [
+        {
+          "descricao": "Consulta cardiológica",
+          "valor": 200.00
+        },
+        {
+          "descricao": "Eletrocardiograma",
+          "valor": 100.00
+        },
+        {
+          "descricao": "Ecocardiograma",
+          "valor": 350.00
+        }
+      ],
+      "percentualComissao": 10,
+      "descricao": "Clínica especializada em cardiologia com equipamentos modernos"
+    },
+    {
+      "nome": "Sorveteria Glacial",
+      "tipo": "Sorveteria",
+      "profissao": "Gastronomia",
+      "empresa": "Glacial",
+      "whatsapp": "(64) 3458-0013",
+      "endereco": {
+        "rua": "Avenida Brasil",
+        "numero": "1500",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-115"
+      },
+      "servicos": [
+        {
+          "descricao": "Sorvete pote 500ml",
+          "valor": 25.00
+        },
+        {
+          "descricao": "Taça com cobertura",
+          "valor": 20.00
+        },
+        {
+          "descricao": "Picolé",
+          "valor": 10.00
+        }
+      ],
+      "percentualComissao": 10,
+      "descricao": "Sorveteria artesanal com sabores naturais"
+    },
+    {
+      "nome": "Óptica Visão Perfeita",
+      "tipo": "Óptica",
+      "profissao": "Óptica",
+      "empresa": "Visão Perfeita",
+      "whatsapp": "(64) 99876-0014",
+      "endereco": {
+        "rua": "Rua Barão do Rio Branco",
+        "numero": "700",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-065"
+      },
+      "servicos": [
+        {
+          "descricao": "Consulta oftalmológica",
+          "valor": 120.00
+        },
+        {
+          "descricao": "Óculos com armação básica",
+          "valor": 200.00
+        },
+        {
+          "descricao": "Lentes de contato",
+          "valor": 150.00
+        }
+      ],
+      "percentualComissao": 12,
+      "descricao": "Óptica com oftalmologista e ampla variedade de armações"
+    },
+    {
+      "nome": "Farmácia Farmalife",
+      "tipo": "Farmácia",
+      "profissao": "Farmácia",
+      "empresa": "Farmalife",
+      "whatsapp": "(64) 3459-0015",
+      "endereco": {
+        "rua": "Avenida Goiás",
+        "numero": "2500",
+        "bairro": "Centro",
+        "cidade": "Caldas Novas",
+        "estado": "GO",
+        "cep": "75680-140"
+      },
+      "servicos": [
+        {
+          "descricao": "Medicamentos",
+          "valor": 50.00
+        },
+        {
+          "descricao": "Aferição de pressão",
+          "valor": 20.00
+        },
+        {
+          "descricao": "Injeções",
+          "valor": 30.00
+        }
+      ],
+      "percentualComissao": 8,
+      "descricao": "Farmácia com atendimento 24h e orientação farmacêutica"
+    }
+  ]
+}
