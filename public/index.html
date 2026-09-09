@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Indica Caldas - Sistema de Indicações</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --success: #4CAF50;
+      --danger: #F44336;
+      --warning: #FFC107;
+      --info: #2196F3;
+      --light: #f5f5f5;
+      --dark: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a, nav button {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+      transition: opacity 0.3s;
+      padding: 8px 16px;
+      border-radius: 5px;
+    }
+
+    nav a:hover, nav button:hover {
+      opacity: 0.8;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .content {
+      padding: 40px 0;
+      min-height: 600px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      animation: fadeIn 0.3s ease-in;
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    .card-header h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    /* Forms */
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 30px auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-warning {
+      background: var(--warning);
+      color: white;
+    }
+
+    .btn-info {
+      background: var(--info);
+      color: white;
+    }
+
+    .btn-block {
+      width: 100%;
+      display: block;
+      margin-top: 20px;
+    }
+
+    /* Tables */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .table th {
+      background: var(--primary);
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table tr:hover {
+      background: var(--light);
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .badge-warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .badge-danger {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .badge-info {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .alert-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    /* Search Box */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .search-box input,
+    .search-box select,
+    .search-box button {
+      padding: 12px 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-box input,
+    .search-box select {
+      flex: 1;
+      min-width: 200px;
+      background: white;
+      border: 1px solid #ddd;
+    }
+
+    .search-box button {
+      background: var(--success);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .search-box button:hover {
+      background: #45a049;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      border: 4px solid var(--light);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 60px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box input,
+      .search-box select {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <i class="fas fa-handshake"></i> Rede Indica Caldas
+      </div>
+      <nav id="mainNav">
+        <a onclick="mostrarPagina('home')"><i class="fas fa-home"></i> Início</a>
+        <a onclick="mostrarPagina('buscar')" class="nav-public"><i class="fas fa-search"></i> Buscar</a>
+        <a onclick="mostrarPagina('meu-perfil')" class="nav-private hidden"><i class="fas fa-user"></i> Perfil</a>
+        <a onclick="mostrarPagina('minhas-indicacoes')" class="nav-private hidden"><i class="fas fa-list"></i> Indicações</a>
+        <a onclick="mostrarPagina('admin')" class="nav-admin hidden"><i class="fas fa-cog"></i> Admin</a>
+        <a onclick="logout()" class="nav-private hidden"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a onclick="mostrarPagina('login')" class="nav-public"><i class="fas fa-sign-in-alt"></i> Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="container">
+      <!-- Home -->
+      <div id="home" class="page active">
+        <div class="hero">
+          <h2>🤝 Bem-vindo à Rede Indica Caldas</h2>
+          <p>Conecte-se com profissionais e ganhe comissões!</p>
+          <div class="search-box">
+            <input type="text" id="busca-rapida" placeholder="Buscar profissão...">
+            <button onclick="buscaRapida()"><i class="fas fa-search"></i> Buscar</button>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>📱 Para Profissionais</h3>
+            </div>
+            <div class="card-body">
+              <p>Cadastre seu perfil, receba indicações de clientes e ganhe comissões!</p>
+              <button class="btn btn-primary btn-block" onclick="mostrarPagina('login')">Entrar / Cadastrar</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>🔍 Buscar Profissionais</h3>
+            </div>
+            <div class="card-body">
+              <p>Encontre os melhores profissionais de Caldas Novas!</p>
+              <button class="btn btn-primary btn-block" onclick="mostrarPagina('buscar')">Buscar Agora</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>💰 Sistema de Comissões</h3>
+            </div>
+            <div class="card-body">
+              <p>Indique clientes e ganhe sua comissão automaticamente!</p>
+              <button class="btn btn-primary btn-block" onclick="mostrarPagina('login')">Saiba Mais</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login / Cadastro -->
+      <div id="login" class="page">
+        <div class="form-container" style="max-width: 500px;">
+          <h2>🔐 Login / Cadastro</h2>
+          <div id="loginAlerts"></div>
+          <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+              <label>Senha:</label>
+              <input type="password" id="loginSenha" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+          </form>
+          <hr style="margin: 20px 0;">
+          <h3>Ou crie uma conta</h3>
+          <form onsubmit="handleCadastro(event)">
+            <div class="form-group">
+              <label>Nome:</label>
+              <input type="text" id="cadastroNome" required>
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="email" id="cadastroEmail" required>
+            </div>
+            <div class="form-group">
+              <label>Senha:</label>
+              <input type="password" id="cadastroSenha" required>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-block">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Buscar Profissionais -->
+      <div id="buscar" class="page">
+        <h2>🔍 Encontre Profissionais</h2>
+        <div class="search-box">
+          <input type="text" id="filtro-profissao" placeholder="Profissão...">
+          <input type="text" id="filtro-cidade" placeholder="Cidade...">
+          <button onclick="filtrarProfissionais()"><i class="fas fa-filter"></i> Filtrar</button>
+        </div>
+        <div id="resultado-busca"></div>
+      </div>
+
+      <!-- Meu Perfil -->
+      <div id="meu-perfil" class="page">
+        <h2>👤 Meu Perfil Profissional</h2>
+        <div id="alertsPerfil"></div>
+        <div class="form-container">
+          <form onsubmit="salvarPerfil(event)">
+            <div class="form-group">
+              <label>Profissão:</label>
+              <input type="text" id="profissao" required>
+            </div>
+            <div class="form-group">
+              <label>Empresa:</label>
+              <input type="text" id="empresa" required>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp:</label>
+              <input type="tel" id="whatsapp" placeholder="(64) 99999-0000" required>
+            </div>
+            <div class="form-group">
+              <label>Descrição:</label>
+              <textarea id="descricao"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Percentual de Comissão (%):</label>
+              <input type="number" id="comissao" min="0" max="100" value="10">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-save"></i> Salvar Perfil
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Minhas Indicações -->
+      <div id="minhas-indicacoes" class="page">
+        <h2>📊 Minhas Indicações</h2>
+        <button class="btn btn-secondary" onclick="mostrarPagina('nova-indicacao')">
+          <i class="fas fa-plus"></i> Nova Indicação
+        </button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Indicado Para</th>
+              <th>Valor</th>
+              <th>Comissão</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-indicacoes"></tbody>
+        </table>
+      </div>
+
+      <!-- Nova Indicação -->
+      <div id="nova-indicacao" class="page">
+        <h2>➕ Registrar Nova Indicação</h2>
+        <div id="alertsIndicacao"></div>
+        <div class="form-container">
+          <form onsubmit="criarIndicacao(event)">
+            <div class="form-group">
+              <label>Profissional para indicar:</label>
+              <select id="profissional-indicado" required></select>
+            </div>
+            <div class="form-group">
+              <label>Nome do Cliente:</label>
+              <input type="text" id="cliente-nome" required>
+            </div>
+            <div class="form-group">
+              <label>Telefone do Cliente:</label>
+              <input type="tel" id="cliente-telefone">
+            </div>
+            <div class="form-group">
+              <label>Email do Cliente:</label>
+              <input type="email" id="cliente-email">
+            </div>
+            <div class="form-group">
+              <label>Descrição do Serviço:</label>
+              <textarea id="descricao-servico"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Valor do Negócio:</label>
+              <input type="number" id="valor-negocio" min="0" step="0.01">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-paper-plane"></i> Registrar Indicação
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Admin -->
+      <div id="admin" class="page">
+        <h2>⚙️ Painel Administrativo</h2>
+        <div class="stats-grid" id="admin-stats"></div>
+        
+        <h3 style="margin-top: 40px;">Profissionais Pendentes</h3>
+        <table class="table" id="tabela-pendentes">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Profissão</th>
+              <th>Empresa</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-pendentes"></tbody>
+        </table>
+
+        <h3 style="margin-top: 40px;">Relatório de Comissões</h3>
+        <table class="table" id="tabela-comissoes">
+          <thead>
+            <tr>
+              <th>Empresa</th>
+              <th>Profissão</th>
+              <th>Indicações</th>
+              <th>Valor Total</th>
+              <th>Comissões</th>
+              <th>Percentual</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-comissoes"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Rede Indica Caldas - Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api';
+    let usuarioLogado = null;
+    let token = null;
+
+    // Verificar login ao carregar
+    function verificarLogin() {
+      token = localStorage.getItem('token');
+      const usuario = localStorage.getItem('usuario');
+      if (token && usuario) {
+        usuarioLogado = JSON.parse(usuario);
+        atualizarNavegacao();
+      }
+    }
+
+    function atualizarNavegacao() {
+      const navPrivate = document.querySelectorAll('.nav-private');
+      const navAdmin = document.querySelectorAll('.nav-admin');
+      const navPublic = document.querySelectorAll('.nav-public');
+
+      if (usuarioLogado) {
+        navPrivate.forEach(el => el.classList.remove('hidden'));
+        navPublic.forEach(el => el.classList.add('hidden'));
+        if (usuarioLogado.tipo === 'admin') {
+          navAdmin.forEach(el => el.classList.remove('hidden'));
+        }
+      } else {
+        navPrivate.forEach(el => el.classList.add('hidden'));
+        navAdmin.forEach(el => el.classList.add('hidden'));
+        navPublic.forEach(el => el.classList.remove('hidden'));
+      }
+    }
+
+    function mostrarPagina(pagina) {
+      // Verificar permissões
+      if (['meu-perfil', 'minhas-indicacoes', 'nova-indicacao'].includes(pagina) && !usuarioLogado) {
+        alert('Você precisa estar logado para acessar esta página');
+        mostrarPagina('login');
+        return;
+      }
+
+      if (pagina === 'admin' && (!usuarioLogado || usuarioLogado.tipo !== 'admin')) {
+        alert('Apenas administradores podem acessar');
+        mostrarPagina('home');
+        return;
+      }
+
+      // Esconder todas as páginas
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pagina).classList.add('active');
+
+      // Carregar dados específicos
+      if (pagina === 'buscar') {
+        filtrarProfissionais();
+      } else if (pagina === 'minhas-indicacoes') {
+        carregarIndicacoes();
+      } else if (pagina === 'meu-perfil') {
+        carregarMeuPerfil();
+      } else if (pagina === 'nova-indicacao') {
+        carregarProfissionaisParaIndicacao();
+      } else if (pagina === 'admin') {
+        carregarAdmin();
+      }
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const senha = document.getElementById('loginSenha').value;
+
+      try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          mostrarAlert('loginAlerts', data.erro, 'error');
+          return;
+        }
+
+        // Salvar token e usuário
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('usuario', JSON.stringify(data.usuario));
+        token = data.token;
+        usuarioLogado = data.usuario;
+
+        atualizarNavegacao();
+        mostrarAlert('loginAlerts', 'Login realizado com sucesso!', 'success');
+        setTimeout(() => mostrarPagina('home'), 1500);
+      } catch (error) {
+        mostrarAlert('loginAlerts', error.message, 'error');
+      }
+    }
+
+    async function handleCadastro(event) {
+      event.preventDefault();
+      const nome = document.getElementById('cadastroNome').value;
+      const email = document.getElementById('cadastroEmail').value;
+      const senha = document.getElementById('cadastroSenha').value;
+
+      try {
+        const response = await fetch(`${API_URL}/auth/registro`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email, senha, tipo: 'profissional' })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          mostrarAlert('loginAlerts', data.erro, 'error');
+          return;
+        }
+
+        mostrarAlert('loginAlerts', 'Cadastro realizado! Aguarde aprovação do administrador.', 'success');
+        document.getElementById('cadastroNome').value = '';
+        document.getElementById('cadastroEmail').value = '';
+        document.getElementById('cadastroSenha').value = '';
+      } catch (error) {
+        mostrarAlert('loginAlerts', error.message, 'error');
+      }
+    }
+
+    async function filtrarProfissionais() {
+      const profissao = document.getElementById('filtro-profissao').value;
+      const cidade = document.getElementById('filtro-cidade').value;
+
+      try {
+        const params = new URLSearchParams();
+        if (profissao) params.append('profissao', profissao);
+        if (cidade) params.append('cidade', cidade);
+
+        const response = await fetch(`${API_URL}/profissionais/buscar?${params}`);
+        const profissionais = await response.json();
+
+        exibirProfissionais(profissionais);
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    function exibirProfissionais(profissionais) {
+      const container = document.getElementById('resultado-busca');
+      container.innerHTML = '';
+
+      if (!profissionais || profissionais.length === 0) {
+        container.innerHTML = '<p class="alert alert-info">Nenhum profissional encontrado.</p>';
+        return;
+      }
+
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+
+      profissionais.forEach(prof => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header">
+            <h3>${prof.usuarioId?.nome || 'Sem nome'}</h3>
+            <p>${prof.profissao}</p>
+          </div>
+          <div class="card-body">
+            <p><strong>Empresa:</strong> ${prof.empresa}</p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/${prof.whatsapp.replace(/\D/g, '')}" target="_blank">${prof.whatsapp}</a></p>
+            <p><strong>Comissão:</strong> <span class="badge badge-success">${prof.percentualComissao}%</span></p>
+            ${prof.descricao ? `<p>${prof.descricao}</p>` : ''}
+            <button class="btn btn-info" onclick="indicarProfissional('${prof._id}')">
+              <i class="fas fa-handshake"></i> Indicar Cliente
+            </button>
+            <a href="https://wa.me/${prof.whatsapp.replace(/\D/g, '')}" target="_blank" class="btn btn-secondary" style="margin-top: 10px;">
+              <i class="fab fa-whatsapp"></i> Contato
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    }
+
+    function indicarProfissional(profissionalId) {
+      if (!usuarioLogado) {
+        alert('Você precisa estar logado para indicar');
+        mostrarPagina('login');
+        return;
+      }
+      document.getElementById('profissional-indicado').value = profissionalId;
+      mostrarPagina('nova-indicacao');
+    }
+
+    async function salvarPerfil(event) {
+      event.preventDefault();
+
+      const perfil = {
+        profissao: document.getElementById('profissao').value,
+        empresa: document.getElementById('empresa').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        descricao: document.getElementById('descricao').value,
+        percentualComissao: parseFloat(document.getElementById('comissao').value),
+        endereco: {
+          cidade: 'Caldas Novas',
+          estado: 'GO'
+        }
+      };
+
+      try {
+        const response = await fetch(`${API_URL}/profissionais/criar`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(perfil)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          mostrarAlert('alertsPerfil', data.erro, 'error');
+          return;
+        }
+
+        mostrarAlert('alertsPerfil', data.mensagem, 'success');
+      } catch (error) {
+        mostrarAlert('alertsPerfil', error.message, 'error');
+      }
+    }
+
+    async function carregarMeuPerfil() {
+      try {
+        const response = await fetch(`${API_URL}/profissionais/meu-perfil`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (!response.ok) return;
+
+        const perfil = await response.json();
+        document.getElementById('profissao').value = perfil.profissao || '';
+        document.getElementById('empresa').value = perfil.empresa || '';
+        document.getElementById('whatsapp').value = perfil.whatsapp || '';
+        document.getElementById('descricao').value = perfil.descricao || '';
+        document.getElementById('comissao').value = perfil.percentualComissao || 0;
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    async function criarIndicacao(event) {
+      event.preventDefault();
+
+      const indicacao = {
+        paraQuem: document.getElementById('profissional-indicado').value,
+        nomeCliente: document.getElementById('cliente-nome').value,
+        telefoneCliente: document.getElementById('cliente-telefone').value,
+        emailCliente: document.getElementById('cliente-email').value,
+        descricaoServico: document.getElementById('descricao-servico').value,
+        valorNegocio: parseFloat(document.getElementById('valor-negocio').value || 0)
+      };
+
+      try {
+        const response = await fetch(`${API_URL}/indicacoes/criar`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(indicacao)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          mostrarAlert('alertsIndicacao', data.erro, 'error');
+          return;
+        }
+
+        mostrarAlert('alertsIndicacao', 'Indicação registrada com sucesso!', 'success');
+        document.querySelector('form').reset();
+        setTimeout(() => mostrarPagina('minhas-indicacoes'), 1500);
+      } catch (error) {
+        mostrarAlert('alertsIndicacao', error.message, 'error');
+      }
+    }
+
+    async function carregarProfissionaisParaIndicacao() {
+      try {
+        const response = await fetch(`${API_URL}/profissionais/buscar?city=Caldas Novas`);
+        const profissionais = await response.json();
+
+        const select = document.getElementById('profissional-indicado');
+        select.innerHTML = '<option value="">Selecione um profissional...</option>';
+
+        profissionais.forEach(prof => {
+          const option = document.createElement('option');
+          option.value = prof._id;
+          option.text = `${prof.empresa} - ${prof.profissao}`;
+          select.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    async function carregarIndicacoes() {
+      try {
+        const response = await fetch(`${API_URL}/indicacoes/minhas`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const indicacoes = await response.json();
+        const tbody = document.getElementById('corpo-indicacoes');
+        tbody.innerHTML = '';
+
+        if (!indicacoes || indicacoes.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Nenhuma indicação ainda</td></tr>';
+          return;
+        }
+
+        indicacoes.forEach(ind => {
+          const statusClass = {
+            pendente: 'badge-warning',
+            confirmado: 'badge-info',
+            concluído: 'badge-success',
+            cancelado: 'badge-danger'
+          }[ind.status] || 'badge-info';
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${ind.nomeCliente}</td>
+            <td>${ind.paraQuem?.empresa || 'N/A'}</td>
+            <td>R$ ${(ind.valorNegocio || 0).toFixed(2)}</td>
+            <td>R$ ${(ind.valorComissao || 0).toFixed(2)}</td>
+            <td><span class="badge ${statusClass}">${ind.status}</span></td>
+            <td>
+              <button class="btn btn-info" onclick="editarIndicacao('${ind._id}', '${ind.status}')">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    async function carregarAdmin() {
+      try {
+        // Carregar estatísticas
+        const statsResponse = await fetch(`${API_URL}/admin/estatisticas`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const stats = await statsResponse.json();
+
+        const statsGrid = document.getElementById('admin-stats');
+        statsGrid.innerHTML = `
+          <div class="stat-card">
+            <h3>${stats.totalUsuarios}</h3>
+            <p>Total de Usuários</p>
+          </div>
+          <div class="stat-card">
+            <h3>${stats.totalProfissionais}</h3>
+            <p>Profissionais Cadastrados</p>
+          </div>
+          <div class="stat-card">
+            <h3>${stats.totalIndicacoes}</h3>
+            <p>Total de Indicações</p>
+          </div>
+          <div class="stat-card">
+            <h3>R$ ${(stats.comissoesTotal || 0).toFixed(2)}</h3>
+            <p>Comissões Totais</p>
+          </div>
+        `;
+
+        // Carregar profissionais pendentes
+        const pendentesResponse = await fetch(`${API_URL}/admin/pendentes`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const pendentes = await pendentesResponse.json();
+
+        const tbodyPendentes = document.getElementById('corpo-pendentes');
+        tbodyPendentes.innerHTML = '';
+
+        if (pendentes.length === 0) {
+          tbodyPendentes.innerHTML = '<tr><td colspan="5" style="text-align: center;">Nenhum profissional pendente</td></tr>';
+        } else {
+          pendentes.forEach(prof => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${prof.usuarioId?.nome}</td>
+              <td>${prof.usuarioId?.email}</td>
+              <td>${prof.profissao}</td>
+              <td>${prof.empresa}</td>
+              <td>
+                <button class="btn btn-secondary" onclick="aprovarProfissional('${prof._id}')">
+                  <i class="fas fa-check"></i> Aprovar
+                </button>
+                <button class="btn btn-danger" onclick="rejeitarProfissional('${prof._id}')">
+                  <i class="fas fa-times"></i> Rejeitar
+                </button>
+              </td>
+            `;
+            tbodyPendentes.appendChild(row);
+          });
+        }
+
+        // Carregar comissões
+        const comissoesResponse = await fetch(`${API_URL}/admin/relatorio/comissoes`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const comissoes = await comissoesResponse.json();
+
+        const tbodyComissoes = document.getElementById('corpo-comissoes');
+        tbodyComissoes.innerHTML = '';
+
+        if (comissoes.relatorio.length === 0) {
+          tbodyComissoes.innerHTML = '<tr><td colspan="6" style="text-align: center;">Nenhuma comissão registrada</td></tr>';
+        } else {
+          comissoes.relatorio.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${item.empresa}</td>
+              <td>${item.profissao}</td>
+              <td>${item.indicacoes}</td>
+              <td>R$ ${(item.valorTotal || 0).toFixed(2)}</td>
+              <td>R$ ${(item.comissoesTotal || 0).toFixed(2)}</td>
+              <td>${item.percentualMedio}%</td>
+            `;
+            tbodyComissoes.appendChild(row);
+          });
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    async function aprovarProfissional(id) {
+      if (!confirm('Deseja aprovar este profissional?')) return;
+
+      try {
+        const response = await fetch(`${API_URL}/admin/profissional/${id}/aprovar`, {
+          method: 'PATCH',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+          alert('Profissional aprovado com sucesso!');
+          carregarAdmin();
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    async function rejeitarProfissional(id) {
+      if (!confirm('Deseja rejeitar este profissional?')) return;
+
+      try {
+        const response = await fetch(`${API_URL}/admin/profissional/${id}/rejeitar`, {
+          method: 'PATCH',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+          alert('Profissional rejeitado!');
+          carregarAdmin();
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    }
+
+    function buscaRapida() {
+      const profissao = document.getElementById('busca-rapida').value;
+      if (profissao) {
+        document.getElementById('filtro-profissao').value = profissao;
+        mostrarPagina('buscar');
+        setTimeout(filtrarProfissionais, 100);
+      }
+    }
+
+    function mostrarAlert(elementId, mensagem, tipo) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+
+      const alertHtml = `
+        <div class="alert alert-${tipo}">
+          <i class="fas fa-${tipo === 'error' ? 'exclamation-circle' : tipo === 'success' ? 'check-circle' : 'info-circle'}"></i>
+          ${mensagem}
+        </div>
+      `;
+
+      element.innerHTML = alertHtml;
+      setTimeout(() => element.innerHTML = '', 5000);
+    }
+
+    function logout() {
+      if (confirm('Deseja sair?')) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        usuarioLogado = null;
+        token = null;
+        atualizarNavegacao();
+        mostrarPagina('home');
+      }
+    }
+
+    // Inicializar
+    verificarLogin();
+  </script>
+</body>
+</html>
