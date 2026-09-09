@@ -1,67 +1,112 @@
-# 🤝 Rede Indica Caldas
+# Rede Indica Caldas
 
-Plataforma de indicações entre profissionais e comércios de Caldas Novas - Goiás.
+Sistema de indicações e comissões para profissionais e comércios em Caldas.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- 🔍 **Diretório Local**: Busque profissionais e comércios por profissão, serviço ou localização
-- 📝 **Cadastro**: Profissionais podem se cadastrar e aguardar aprovação do administrador
-- 💼 **Indicações**: Registre indicações de clientes entre profissionais e acompanhe comissões
-- 📊 **Estatísticas**: Veja total de indicações, valor dos negócios e comissões geradas
-- 🔐 **Painel Admin**: Aprove/recuse cadastros e registre novas indicações
+### Público
+- 🔍 Buscar profissionais por profissão e cidade
+- 👤 Visualizar perfil completo de profissionais
+- 📞 Entrar em contato via WhatsApp
 
-## 🚀 Como usar
+### Profissional
+- 📝 Cadastrar e gerenciar perfil profissional
+- 💼 Indicar clientes para outros profissionais
+- 📊 Acompanhar indicações realizadas
+- 💰 Controlar comissões recebidas
+- ⭐ Ofertar percentual de comissão
 
-1. **Encontrar profissionais**: Acesse a seção "Buscar" e pesquise por profissão ou serviço
-2. **Cadastrar negócio**: Preencha o formulário em "Cadastrar" e aguarde aprovação
-3. **Fazer indicações**: Use o painel admin para registrar indicações e acompanhar comissões
+### Administrador
+- ✅ Aprovar/rejeitar cadastros de profissionais
+- 📈 Acompanhar todas as indicações
+- 💵 Gerar relatórios de comissões
+- 👥 Gerenciar profissionais
 
-## 🛠️ Tecnologia
+## Tecnologia
 
-- **Frontend**: HTML5, CSS3, JavaScript Vanilla
-- **Armazenamento**: LocalStorage (versão inicial)
-- **Hospedagem**: GitHub Pages
+- **Backend:** Node.js + Express
+- **Banco de Dados:** MongoDB
+- **Frontend:** HTML5, CSS3, JavaScript Vanilla
+- **Autenticação:** JWT
+- **Segurança:** bcryptjs para hash de senhas
 
-## 📦 Estrutura
+## Instalação
+
+### Pré-requisitos
+- Node.js (v14+)
+- MongoDB
+
+### Passos
+
+1. Clone o repositório
+```bash
+git clone https://github.com/cirleneds63-dotcom/rede-indica-caldas.git
+cd rede-indica-caldas
+```
+
+2. Instale as dependências
+```bash
+npm install
+```
+
+3. Configure as variáveis de ambiente
+```bash
+cp .env.example .env
+```
+
+4. Inicie o servidor
+```bash
+npm start
+```
+
+O servidor estará disponível em `http://localhost:5000`
+
+## Estrutura do Projeto
 
 ```
 rede-indica-caldas/
-├── index.html      # Estrutura HTML
-├── style.css       # Estilos CSS
-├── app.js          # Lógica JavaScript
-└── README.md       # Documentação
+├── models/              # Modelos MongoDB
+│   ├── User.js
+│   ├── Profissional.js
+│   └── Indicacao.js
+├── routes/              # Rotas da API
+│   ├── auth.js
+│   ├── profissionais.js
+│   ├── indicacoes.js
+│   └── admin.js
+├── public/              # Frontend
+│   └── index.html
+├── server.js            # Arquivo principal
+├── package.json
+└── README.md
 ```
 
-## 🌐 Acessar online
+## API Endpoints
 
-🔗 **[Rede Indica Caldas ao vivo](https://cirleneds63-dotcom.github.io/rede-indica-caldas/)**
+### Autenticação
+- `POST /api/auth/registro` - Registrar novo usuário
+- `POST /api/auth/login` - Login
 
-## 📱 Links para compartilhar
+### Profissionais
+- `GET /api/profissionais/buscar?profissao=X&cidade=Y` - Buscar profissionais
+- `GET /api/profissionais/:id` - Obter perfil completo
+- `POST /api/profissionais/criar` - Criar/atualizar perfil
 
-**GitHub**: https://github.com/cirleneds63-dotcom/rede-indica-caldas
+### Indicações
+- `POST /api/indicacoes/criar` - Registrar indicação
+- `GET /api/indicacoes/profissional/:id` - Obter indicações
+- `PATCH /api/indicacoes/:id` - Atualizar indicação
 
-**Site**: https://cirleneds63-dotcom.github.io/rede-indica-caldas/
+### Admin
+- `GET /api/admin/pendentes` - Listar profissionais pendentes
+- `PATCH /api/admin/profissional/:id/aprovar` - Aprovar profissional
+- `PATCH /api/admin/profissional/:id/rejeitar` - Rejeitar profissional
+- `GET /api/admin/relatorio/comissoes` - Relatório de comissões
 
-**WhatsApp**: Compartilhe o link do site com seus contatos!
+## Contribuindo
 
-## 🔄 Próximas melhorias
+Pull requests são bem-vindas!
 
-- [ ] Integração com banco de dados real (Firebase/Supabase)
-- [ ] Sistema de autenticação/login
-- [ ] Upload de fotos para profissionais
-- [ ] Sistema de avaliações e comentários
-- [ ] Exportar dados de indicações (PDF/Excel)
-- [ ] Aplicativo mobile
-- [ ] Integração com WhatsApp API
-
-## 📝 Licença
+## Licença
 
 MIT
-
-## 👤 Autor
-
-Criado para conectar profissionais e comércios de Caldas Novas.
-
----
-
-**Desenvolvido com ❤️ para Caldas Novas**

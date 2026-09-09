@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Indica Caldas - Diretório de Profissionais</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      margin-top: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box input,
+    .search-box button {
+      padding: 12px 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: white;
+    }
+
+    .search-box button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .search-box button:hover {
+      background: #45a049;
+    }
+
+    .content {
+      padding: 40px 0;
+      min-height: 500px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .profissional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    .card-header h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .card-header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #764ba2;
+    }
+
+    .btn-secondary {
+      background: #4CAF50;
+    }
+
+    .btn-secondary:hover {
+      background: #45a049;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 30px auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .form-group button:hover {
+      transform: translateY(-2px);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .table th {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table tr:hover {
+      background: #f9f9f9;
+    }
+
+    .status {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status.pendente {
+      background: #FFC107;
+      color: white;
+    }
+
+    .status.confirmado {
+      background: #2196F3;
+      color: white;
+    }
+
+    .status.concluído {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .status.cancelado {
+      background: #F44336;
+      color: white;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 60px;
+    }
+
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🤝 Rede Indica Caldas</h1>
+      <p>Sistema de Indicações e Networking entre Profissionais</p>
+      <nav>
+        <a onclick="mostrarPagina('home')">Início</a>
+        <a onclick="mostrarPagina('buscar')">Buscar Profissionais</a>
+        <a onclick="mostrarPagina('cadastro')">Meu Cadastro</a>
+        <a onclick="mostrarPagina('minhas-indicacoes')">Minhas Indicações</a>
+        <a onclick="mostrarPagina('admin')" id="admin-link" class="hidden">Admin</a>
+        <a onclick="logout()">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="container">
+      <!-- Página Home -->
+      <div id="home" class="page active">
+        <div class="hero">
+          <h2>Conecte-se com Profissionais</h2>
+          <p>Indique clientes e ganhe comissões</p>
+          <div class="search-box">
+            <input type="text" id="profissao" placeholder="Buscar por profissão...">
+            <button onclick="buscarProfissionais()">Buscar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Página Buscar Profissionais -->
+      <div id="buscar" class="page">
+        <h2>Encontre Profissionais</h2>
+        <div class="search-box">
+          <input type="text" id="filtro-profissao" placeholder="Profissão...">
+          <input type="text" id="filtro-cidade" placeholder="Cidade...">
+          <button onclick="filtrarProfissionais()">Filtrar</button>
+        </div>
+        <div id="resultado-busca" class="profissional-grid"></div>
+      </div>
+
+      <!-- Página Cadastro -->
+      <div id="cadastro" class="page">
+        <h2>Meu Perfil Profissional</h2>
+        <form onsubmit="salvarPerfil(event)">
+          <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" id="nome" required>
+          </div>
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label>Profissão:</label>
+            <input type="text" id="profissao-form" required>
+          </div>
+          <div class="form-group">
+            <label>Empresa:</label>
+            <input type="text" id="empresa" required>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp:</label>
+            <input type="tel" id="whatsapp" required>
+          </div>
+          <div class="form-group">
+            <label>Descrição:</label>
+            <textarea id="descricao"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Percentual de Comissão (%):</label>
+            <input type="number" id="comissao" min="0" max="100" value="10">
+          </div>
+          <div class="form-group">
+            <button type="submit">Salvar Perfil</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Página Minhas Indicações -->
+      <div id="minhas-indicacoes" class="page">
+        <h2>Minhas Indicações</h2>
+        <button class="btn btn-secondary" onclick="mostrarPagina('nova-indicacao')">+ Nova Indicação</button>
+        <table class="table" id="tabela-indicacoes">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Indicado Para</th>
+              <th>Data</th>
+              <th>Valor</th>
+              <th>Comissão</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-indicacoes"></tbody>
+        </table>
+      </div>
+
+      <!-- Nova Indicação -->
+      <div id="nova-indicacao" class="page">
+        <h2>Registrar Nova Indicação</h2>
+        <form onsubmit="criarIndicacao(event)">
+          <div class="form-group">
+            <label>Profissional para indicar:</label>
+            <select id="profissional-indicado" required></select>
+          </div>
+          <div class="form-group">
+            <label>Nome do Cliente:</label>
+            <input type="text" id="cliente-nome" required>
+          </div>
+          <div class="form-group">
+            <label>Telefone do Cliente:</label>
+            <input type="tel" id="cliente-telefone">
+          </div>
+          <div class="form-group">
+            <label>Email do Cliente:</label>
+            <input type="email" id="cliente-email">
+          </div>
+          <div class="form-group">
+            <label>Descrição do Serviço:</label>
+            <textarea id="descricao-servico"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit">Registrar Indicação</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Admin -->
+      <div id="admin" class="page">
+        <h2>Painel Administrativo</h2>
+        <h3>Profissionais Pendentes</h3>
+        <div id="pendentes-container"></div>
+        <h3>Relatório de Comissões</h3>
+        <table class="table" id="tabela-relatorio"></table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Rede Indica Caldas - Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api';
+    let usuarioLogado = null;
+
+    // Verificar login ao carregar
+    function verificarLogin() {
+      const token = localStorage.getItem('token');
+      const usuario = localStorage.getItem('usuario');
+      if (token && usuario) {
+        usuarioLogado = JSON.parse(usuario);
+        document.getElementById('admin-link').classList.toggle('hidden', usuarioLogado.tipo !== 'admin');
+      }
+    }
+
+    function mostrarPagina(pagina) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pagina).classList.add('active');
+      
+      if (pagina === 'minhas-indicacoes') {
+        carregarIndicacoes();
+      } else if (pagina === 'admin') {
+        carregarPendentes();
+      }
+    }
+
+    function buscarProfissionais() {
+      const profissao = document.getElementById('profissao').value;
+      if (profissao) {
+        document.getElementById('filtro-profissao').value = profissao;
+        mostrarPagina('buscar');
+        filtrarProfissionais();
+      }
+    }
+
+    async function filtrarProfissionais() {
+      const profissao = document.getElementById('filtro-profissao').value;
+      const cidade = document.getElementById('filtro-cidade').value;
+      
+      try {
+        const params = new URLSearchParams();
+        if (profissao) params.append('profissao', profissao);
+        if (cidade) params.append('cidade', cidade);
+        
+        const response = await fetch(`${API_URL}/profissionais/buscar?${params}`);
+        const profissionais = await response.json();
+        
+        exibirProfissionais(profissionais);
+      } catch (error) {
+        console.error('Erro ao buscar profissionais:', error);
+      }
+    }
+
+    function exibirProfissionais(profissionais) {
+      const container = document.getElementById('resultado-busca');
+      container.innerHTML = '';
+      
+      if (profissionais.length === 0) {
+        container.innerHTML = '<p>Nenhum profissional encontrado.</p>';
+        return;
+      }
+      
+      profissionais.forEach(prof => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header">
+            <h3>${prof.usuarioId?.nome || 'Sem nome'}</h3>
+            <p>${prof.profissao}</p>
+          </div>
+          <div class="card-body">
+            <p><strong>Empresa:</strong> ${prof.empresa}</p>
+            <p><strong>WhatsApp:</strong> ${prof.whatsapp}</p>
+            <p><strong>Comissão oferecida:</strong> <span class="badge">${prof.percentualComissao}%</span></p>
+            ${prof.descricao ? `<p>${prof.descricao}</p>` : ''}
+            <button class="btn" onclick="indicarProfissional('${prof._id}')">Indicar Clientes</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function indicarProfissional(profissionalId) {
+      document.getElementById('profissional-indicado').value = profissionalId;
+      mostrarPagina('nova-indicacao');
+    }
+
+    async function salvarPerfil(event) {
+      event.preventDefault();
+      // Lógica de salvamento do perfil
+      alert('Perfil salvo com sucesso!');
+    }
+
+    async function criarIndicacao(event) {
+      event.preventDefault();
+      alert('Indicação registrada com sucesso!');
+    }
+
+    async function carregarIndicacoes() {
+      // Lógica para carregar indicações
+    }
+
+    async function carregarPendentes() {
+      // Lógica para carregar profissionais pendentes
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
+      usuarioLogado = null;
+      mostrarPagina('home');
+    }
+
+    // Inicializar
+    verificarLogin();
+  </script>
+</body>
+</html>
