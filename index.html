@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rede Indica Caldas - diretório de profissionais e comércios de Caldas Novas">
+  <title>Rede Indica Caldas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="brand">
+    🤝 Rede Indica <strong>Caldas</strong>
+  </div>
+
+  <nav>
+    <a href="#buscar">Buscar</a>
+    <a href="#cadastro">Cadastrar</a>
+    <a href="#indicacoes">Indicações</a>
+    <a href="#admin">Admin</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">CALDAS NOVAS • GOIÁS</span>
+
+    <h1>
+      Indique.<br>
+      Conecte.<br>
+      <span>Ganhe.</span>
+    </h1>
+
+    <p>
+      Uma rede para profissionais e comércios de Caldas Novas
+      indicarem clientes uns para os outros e acompanharem suas comissões.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="#buscar">
+        🔎 Encontrar profissional
+      </a>
+
+      <a class="btn" href="#cadastro">
+        ➕ Cadastrar meu negócio
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <h2>Como funciona?</h2>
+
+    <div class="step">
+      <span>1</span>
+      <div>
+        <strong>Cadastre seu negócio</strong>
+        <small>Apresente seus serviços.</small>
+      </div>
+    </div>
+
+    <div class="step">
+      <span>2</span>
+      <div>
+        <strong>Encontre parceiros</strong>
+        <small>Pesquise profissionais.</small>
+      </div>
+    </div>
+
+    <div class="step">
+      <span>3</span>
+      <div>
+        <strong>Faça indicações</strong>
+        <small>Envie clientes para parceiros.</small>
+      </div>
+    </div>
+
+    <div class="step">
+      <span>4</span>
+      <div>
+        <strong>Acompanhe</strong>
+        <small>Controle negócios e comissões.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="buscar" class="section">
+
+  <div class="section-title">
+    <div>
+      <small>DIRETÓRIO LOCAL</small>
+      <h2>Encontre profissionais e comércios</h2>
+    </div>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="Digite profissão, empresa ou serviço..."
+      oninput="renderBusinesses()"
+    >
+  </div>
+
+  <div id="businesses" class="grid"></div>
+
+</section>
+
+
+<section id="cadastro" class="section alt">
+
+  <div class="section-title">
+    <div>
+      <small>PARCEIROS</small>
+      <h2>Cadastre seu negócio</h2>
+    </div>
+  </div>
+
+  <div class="form-card">
+
+    <p class="form-intro">
+      Preencha seus dados. O cadastro ficará aguardando aprovação
+      do administrador.
+    </p>
+
+    <form id="registerForm" onsubmit="registerBusiness(event)">
+
+      <div class="form-grid">
+
+        <div>
+          <label>Nome do profissional</label>
+          <input name="name" required>
+        </div>
+
+        <div>
+          <label>Profissão / categoria</label>
+          <input name="profession" required>
+        </div>
+
+        <div>
+          <label>Empresa / comércio</label>
+          <input name="company" required>
+        </div>
+
+        <div>
+          <label>WhatsApp</label>
+          <input name="whatsapp" required placeholder="(64) 99999-9999">
+        </div>
+
+        <div>
+          <label>Endereço</label>
+          <input name="address" required>
+        </div>
+
+        <div>
+          <label>Comissão oferecida (%)</label>
+          <input
+            name="commission"
+            type="number"
+            min="0"
+            max="100"
+            step="0.1"
+          >
+        </div>
+
+        <div class="full">
+          <label>Serviços oferecidos</label>
+          <textarea name="services" required></textarea>
+        </div>
+
+        <div class="full">
+          <label>URL da foto (opcional)</label>
+          <input
+            name="photo"
+            type="url"
+            placeholder="https://..."
+          >
+        </div>
+
+      </div>
+
+      <button class="btn primary" type="submit">
+        Enviar cadastro para aprovação
+      </button>
+
+    </form>
+  </div>
+
+</section>
+
+
+<section id="indicacoes" class="section">
+
+  <div class="section-title">
+    <div>
+      <small>ÁREA DO PROFISSIONAL</small>
+      <h2>Minhas indicações</h2>
+    </div>
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong id="sTotal">0</strong>
+      <span>Total de indicações</span>
+    </div>
+
+    <div class="stat">
+      <strong id="sValue">R$ 0,00</strong>
+      <span>Valor dos negócios</span>
+    </div>
+
+    <div class="stat">
+      <strong id="sComm">R$ 0,00</strong>
+      <span>Comissões</span>
+    </div>
+
+  </div>
+
+  <div id="referrals" class="table-wrap"></div>
+
+</section>
+
+
+<section id="admin" class="section alt">
+
+  <div class="section-title">
+    <div>
+      <small>ADMINISTRAÇÃO</small>
+      <h2>Painel administrativo</h2>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+
+    <div class="form-card">
+
+      <h3>Registrar indicação</h3>
+
+      <form onsubmit="addReferral(event)" class="stack">
+
+        <label>Quem indicou</label>
+        <input name="from" required>
+
+        <label>Profissional/comércio indicado</label>
+        <input name="to" required>
+
+        <label>Cliente</label>
+        <input name="client" required>
+
+        <label>Valor do negócio</label>
+        <input
+          name="value"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+
+        <label>Comissão (%)</label>
+        <input
+          name="commission"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          required
+        >
+
+        <label>Status</label>
+        <select name="status">
+          <option>Pendente</option>
+          <option>Em andamento</option>
+          <option>Concluída</option>
+          <option>Comissão paga</option>
+        </select>
+
+        <button class="btn primary">
+          Registrar indicação
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <div class="form-card">
+
+      <h3>Cadastros pendentes</h3>
+
+      <div id="pending"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  <strong>🤝 Rede Indica Caldas</strong>
+  <p>Conectando profissionais e comércios de Caldas Novas.</p>
+  <small>© 2026 Rede Indica Caldas</small>
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
